@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:project_mobile_620710312/Controller/CartController.dart';
 import 'package:project_mobile_620710312/Model/MobileData.dart';
+import 'package:project_mobile_620710312/Pages/CartPage.dart';
 import 'package:project_mobile_620710312/Pages/MobileDetailsPage.dart';
 
 
@@ -11,25 +16,43 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final cartController = Get.put(CartController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Mobile Shop'),
       ),
+
       body: Stack(
         children: [
-          ListView.builder(
+          Padding(
             padding: const EdgeInsets.all(8.0),
-            itemCount: mobilesData.MobilesData.length,
-            itemBuilder: (context, index) => _buildListItem(context, index),
-          ),
-            const Center(
-              child:  SizedBox(
-                  width: 40,
-                  height: 40,
-                  child:  CircularProgressIndicator()),
+            child: ListView.builder(
+              padding: const EdgeInsets.all(8.0),
+              itemCount: mobilesData.MobilesData.length,
+              itemBuilder: (context, index) => _buildListItem(context, index),
             ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Align(
+              alignment: Alignment.topRight,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton.icon(
+                  onPressed: () =>Get.to(() => CartPage()),
+                  label: const Padding(
+                    padding: EdgeInsets.all(9.0),
+                  ),
+                  icon: const Icon(
+                    Icons.shopping_cart,
+                    size: 30,
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -71,7 +94,17 @@ class _HomePageState extends State<HomePage> {
                           '${MobileItem.Price.toString()} บาท',
                           style: TextStyle(fontSize: 15.0),
                         ),
+
                       ],
+                    ),
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: IconButton(
+                          onPressed:(){
+                            cartController.addMobile(mobilesData.MobilesData[index]);
+                          }
+                          , icon: Icon(Icons.add_shopping_cart,)
+                      ),
                     ),
                   ],
                 ),

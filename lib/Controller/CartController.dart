@@ -26,6 +26,7 @@ class CartController extends GetxController {
       _mobiles[mobile] -= 1;
     }
   }
-
   get mobiles => _mobiles;
+  get costTotal => _mobiles.entries.map((mobile)=>mobile.key.Price * mobile.value).toList();
+  get total => _mobiles.entries.map((mobile)=>mobile.key.Price * mobile.value).toList().reduce((value, element) => value+element).toString();
 }

@@ -8,18 +8,20 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 600,
-      child: ListView.builder(
-          itemCount: controller.mobiles.length,
-          itemBuilder: (BuildContext context, int index){
-            return CartProductCart(
-                controller: controller,
-              mobile: controller.mobiles.keys.toList()[index],
-              quatity: controller.mobiles.values.toList()[index],
-              index: index,
-            );
-    }),
+    return Obx(
+      () => SizedBox(
+        height: 600,
+        child: ListView.builder(
+            itemCount: controller.mobiles.length,
+            itemBuilder: (BuildContext context, int index){
+              return CartProductCart(
+                  controller: controller,
+                mobile: controller.mobiles.keys.toList()[index],
+                quatity: controller.mobiles.values.toList()[index],
+                index: index,
+              );
+      }),
+      ),
     );
   }
 }

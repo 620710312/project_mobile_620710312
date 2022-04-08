@@ -15,7 +15,6 @@ class MobileDetailsPage extends StatefulWidget {
 }
 
 class _MobileDetailsPageState extends State<MobileDetailsPage> {
-  final cartController = Get.put(CartController());
   late int mobileindex;
 
 
@@ -34,22 +33,6 @@ class _MobileDetailsPageState extends State<MobileDetailsPage> {
         children: [
           Column(
             children: [
-              Align(
-                alignment: Alignment.topRight,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton.icon(
-                    onPressed: () =>Get.to(() => CartPage()),
-                    label: const Padding(
-                      padding: EdgeInsets.all(9.0),
-                    ),
-                    icon: const Icon(
-                      Icons.shopping_cart,
-                      size: 60,
-                    ),
-                  ),
-                ),
-              ),
               AspectRatio(
                 aspectRatio: 1.7,
                 child: Image.network(
@@ -76,12 +59,6 @@ class _MobileDetailsPageState extends State<MobileDetailsPage> {
                   style: TextStyle(fontSize: 20.0),
                 ),
 
-              ),
-              IconButton(
-                  onPressed:(){
-                     cartController.addMobile(mobilesData.MobilesData[mobileindex]);
-                  }
-                  , icon: Icon(Icons.add_shopping_cart,)
               ),
             ],
           ),
